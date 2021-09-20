@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib import messages
-from aplicativo.forms import FilmesModelForm
+from aplicativo.forms import FilmesModelForm, ClienteModelForm
 
 # Create your views here.
 
@@ -22,3 +22,19 @@ def filmes(request):
         'form': form
     }
     return render(request, 'filmes.html', context)
+
+def cliente(request):
+    if request.method == 'POST':
+        form = ClienteModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Cliente cadastrado com sucesso!')
+            form = ClienteModelForm()
+        else:
+            messages.error(request, 'Cliente não cadastrado!')
+    else:
+        form = ClienteModelForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'cliente.html', context)
