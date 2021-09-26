@@ -1,4 +1,6 @@
 from django.db import models
+from stdimage import StdImageField
+
 
 class Cliente(models.Model):
     nome = models.CharField('Nome', max_length=32)
@@ -8,19 +10,21 @@ class Cliente(models.Model):
     def __str__(self):
         return "{}".format(self.nome)
 
-class Agenda(models.Model):
-    filmes = models.CharField('Filme', max_length=32)
-    cartaz = models.BooleanField(default=True)
-    dataFilme = models.DateField()
+class Cartaz(models.Model):
+    dataCartaz = models.DateField(verbose_name='Data do Cartaz')
+    #horário
+
+    def __str__(self):
+        return "Cartaz do dia {}".format(self.dataCartaz)
 
 class Filme(models.Model):
-    agenda = models.ForeignKey(Agenda, on_delete=models.CASCADE)
+    cartaz = models.ForeignKey(Cartaz, on_delete=models.CASCADE)
     nome = models.CharField('Nome', max_length=16)
     sinopse = models.CharField('Sinopse', max_length=128)
     categoria = models.CharField('Categoria', max_length=16)
     classificacao = models.CharField('Classificação', max_length=8)
-    #duracao = models.CharField('Duração', max_length=16)
-    duracao = models.DateTimeField()
+    duracao = models.CharField('Duração', max_length=16)
+    capa = StdImageField('imagem', upload_to='imagens', variations={'thumb': (90, 90)})
 
     def __str__(self):
         return "{}".format(self.nome)

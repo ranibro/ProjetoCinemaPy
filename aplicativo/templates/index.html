@@ -1,10 +1,21 @@
 <!DOCTYPE html>
+{% load bootstrap4 %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Projeto Gerencia Cinema</title>
+    {% bootstrap_css %}
 </head>
 <body>
+    {% bootstrap_messages %}
     <h1>Página inicial Em Construção</h1>
+        {% buttons %}
+            <a type="button" class="btn btn-primary btn-lg btn-block" href="filmes">Registro de Filmes </a>
+            <a type="button" class="btn btn-secondary btn-lg btn-block" href="cliente">Cadastro de Clientes</a>
+            <a type="button" class="btn btn-primary btn-lg btn-block" href="cartaz">Criar Cartaz</a>
+            <a type="button" class="btn btn-secondary btn-lg btn-block" href="filme_list">Lista de Filmes</a>
+            <a type="button" class="btn btn-primary btn-lg btn-block" href="admin">Fazer Login</a>
+        {% endbuttons %}
+{% bootstrap_javascript jquery='full' %}
 </body>
 </html>

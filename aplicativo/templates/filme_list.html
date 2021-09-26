@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load bootstrap4 %}
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Filmes</title>
+    {% bootstrap_css %}
+</head>
+<body>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Cartaz</th>
+        <th scope="col">Filme</th>
+        <th scope="col">Classificação</th>
+        <th scope="col">Duração</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for filme in filmes %}
+    <tr>
+        <td scope="row">{{filme.id}}</td>
+        <td scope="row">{{filme.cartaz}}</td>
+        <td scope="row"><a href="#modal{{filme.id}}" data-toggle="modal" data-target="#modal{{filme.id}}"/>{{filme.nome}}</td>
+        <td scope="row">{{filme.classificacao}}</td>
+        <td scope="row">{{filme.duracao}}</td>
+    </tr>
+
+    <div class="modal" tabindex="-1" id="modal{{filme.id}}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{filme.capa.url}}" class="img-thumbnail"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </tbody>
+</table>
+
+</body>
+{% bootstrap_javascript jquery='full' %}
+</html>

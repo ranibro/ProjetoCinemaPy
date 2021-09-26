@@ -1,20 +1,23 @@
 from django import forms
 from GerenciaCinema import settings
-from aplicativo.models import Filme, Cliente, Agenda, Recibo, Combo
+from aplicativo.models import Filme, Cliente, Cartaz, Recibo, Combo
 
 class FilmesModelForm(forms.ModelForm):
     class Meta:
         model = Filme
-        fields = ['nome', 'sinopse', 'categoria', 'classificacao', 'duracao']
+        fields = ['cartaz', 'nome', 'sinopse', 'categoria', 'classificacao', 'duracao', 'capa']
 
-        duracao = forms.DateTimeField(widget=forms.DateTimeInput(format='%H:%M:%S'),
-                                      input_formats='%H:%M:%S')
-
-        # widget vai mostrar como texto de fundo a formatação de data
-        # que o sistema aceita para o usuário visualizar
-        # o formato de data está localizado em settings.py
 
 class ClienteModelForm(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = ['nome', 'login', 'email']
+
+class CartazModelForm(forms.ModelForm):
+    class Meta:
+        model = Cartaz
+        fields = ['dataCartaz']
+        widgets = {
+            'dataCartaz': forms.DateInput(format=settings.DATE_INPUT_FORMATS,
+                                          attrs={'placeholder': 'Ex:. 01/01/2000'})
+        }
