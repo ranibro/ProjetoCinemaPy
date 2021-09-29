@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 {% load bootstrap4 %}
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Projeto Gerencia Cinema</title>
+    <title>Página Inicial</title>
     {% bootstrap_css %}
 </head>
 <body>
     {% bootstrap_messages %}
-    <h1>Página inicial Em Construção</h1>
+    <style>
+    .espaco-2cm {
+    margin-bottom: 2cm;
+    }
+    </style>
+    <p class="espaco-2cm"></p>
         {% buttons %}
-            <a type="button" class="btn btn-primary btn-lg btn-block" href="filmes">Registro de Filmes </a>
-            <a type="button" class="btn btn-secondary btn-lg btn-block" href="cliente">Cadastro de Clientes</a>
-            <a type="button" class="btn btn-primary btn-lg btn-block" href="cartaz">Criar Cartaz</a>
+            <a type="button" class="btn btn-primary btn-lg btn-block" href="index_auth">Página de Usuário</a>
             <a type="button" class="btn btn-secondary btn-lg btn-block" href="filme_list">Lista de Filmes</a>
-            <a type="button" class="btn btn-primary btn-lg btn-block" href="admin">Fazer Login</a>
+            <! target="_blank" abre uma nova aba>
+            <a type="button" class="btn btn-primary btn-lg btn-block" href="admin" target="_blank">Fazer Login</a>
         {% endbuttons %}
 {% bootstrap_javascript jquery='full' %}
 </body>

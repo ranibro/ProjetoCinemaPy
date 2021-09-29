@@ -95,7 +95,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'UTC'
 
@@ -120,4 +120,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Formatação de Data para dd/mm/yyyy
-DATE_INPUT_FORMATS = ['%d/%m/%Y']
+DATE_INPUT_FORMATS = ['%d/%m/%Y', '%d/%m/%Y', '%d-%m-%Y', '%Y-%m-%d']

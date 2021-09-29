@@ -12,7 +12,6 @@ class Cliente(models.Model):
 
 class Cartaz(models.Model):
     dataCartaz = models.DateField(verbose_name='Data do Cartaz')
-    #horário
 
     def __str__(self):
         return "Cartaz do dia {}".format(self.dataCartaz)

@@ -1,6 +1,6 @@
 from django.conf.urls.static import static
 
-from aplicativo.views import index, filmes, cliente, filme_list, cartaz
+from aplicativo.views import index, index_auth, filmes, cliente, filme_list, cartaz
 from django.urls import path
 from GerenciaCinema import settings
 
@@ -8,6 +8,7 @@ app_name = 'aplicativo'
 
 urlpatterns = [
     path('', index),
+    path('index_auth', index_auth, name='index_auth'),
     path('filmes', filmes, name='filmes'),
     path('cliente', cliente, name='cliente'),
     path('filme_list', filme_list, name='filme_list'),
