@@ -1,9 +1,8 @@
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from aplicativo.models import Filme, Cliente, Cartaz, Cliente
-from aplicativo.forms import FilmesModelForm, ClienteModelForm, CartazModelForm
+from aplicativo.models import Filme
+from aplicativo.forms import FilmesModelForm, ClienteModelForm, RegistroClienteModelForm, CartazModelForm, AssentoModelForm
 
 # Create your views here.
 
@@ -23,25 +22,27 @@ def filme_list(request):
     return render(request, 'filme_list.html', context)
 
 def registrar(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Usuário Registrado com Sucesso!')
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect(index)
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = RegistroClienteModelForm(request.POST)
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get('username')
+                raw_password = form.cleaned_data.get('password1')
+                user = authenticate(username=username, password=raw_password)
+                login(request, user)
+                return redirect(index)
+            else:
+                messages.error(request, 'Erro no cadastro do Usuário!')
         else:
-            messages.error(request, 'Erro no cadastro do Usuário!')
-    else:
-        form = UserCreationForm
+            form = RegistroClienteModelForm
 
-    context = {
-        'form': form
-    }
-    return render(request, 'registrar.html', context)
+        context = {
+            'form': form
+        }
+        return render(request, 'registrar.html', context)
+    else:
+        return redirect(index)
 
 def filmes(request):
     if request.user.is_authenticated:
@@ -62,6 +63,7 @@ def filmes(request):
     else:
         return redirect(index)
 
+
 def cliente(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -81,6 +83,7 @@ def cliente(request):
     else:
         return redirect(index)
 
+
 def cartaz(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -99,3 +102,23 @@ def cartaz(request):
         return render(request, 'cartaz.html', context)
     else:
         return redirect(index)
+
+def assento(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = AssentoModelForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Assento reservado com sucesso!')
+                form = AssentoModelForm()
+            else:
+                messages.error(request, 'Erro ao reservar assento!')
+        else:
+            form = AssentoModelForm()
+        context = {
+            'form': form
+        }
+        return render(request, 'assento.html', context)
+    else:
+        messages.error(request, 'É necessário estar Autenticado para Assistir um filme')
+        return redirect('filme_list')
