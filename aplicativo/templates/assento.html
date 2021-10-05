@@ -17,7 +17,7 @@
             {% for assentos in assento %}
             {% if assentos.livre %}
             <input type="checkbox" id="{{assentos.livre}}" value="False"/>
-            {{assentos.id}}
+            {{assentos.registro}}
             {% endif %}
             {% endfor %}
             {% buttons %}
