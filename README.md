@@ -1,6 +1,9 @@
 # ProjetoCinemaPy
 Projeto de TESI 2
 
+NO REPOSITÓRIO DO GITHUB NÃO POSSUI A PASTA DE INSTALAÇÃO DO DJANGO, ENTÃO É NECESSÁRIO A INSTALAÇÃO
+DO DJANGO NO PROJETO
+
 Conta de Administrador
 
 Usuário:Admin
@@ -23,3 +26,4 @@ Para ter uma lista de filmes, é necessário ter filmes, e para registrar filmes
 ATENÇÃO: É NECESSÁRIO CRIAR ASSENTOS NO DJANGO-ADMIN para o cliente poder escolhe-los
 
 Cartazes carregam informação da Sala, tais como Horário, Data e o Filme
+
