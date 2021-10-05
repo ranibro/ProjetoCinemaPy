@@ -1,8 +1,10 @@
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from aplicativo.models import Filme
-from aplicativo.forms import FilmesModelForm, ClienteModelForm, RegistroClienteModelForm, CartazModelForm, AssentoModelForm
+from aplicativo.models import Filme, Assentos
+from aplicativo.forms import FilmesModelForm, ClienteModelForm, RegistroClienteModelForm, CartazModelForm, \
+    AssentoModelForm
+
 
 # Create your views here.
 
@@ -108,17 +110,16 @@ def assento(request):
         if request.method == 'POST':
             form = AssentoModelForm(request.POST)
             if form.is_valid():
-                form.save()
-                messages.success(request, 'Assento reservado com sucesso!')
-                form = AssentoModelForm()
+
+                messages.success(request, 'Assentos Reservados!')
             else:
-                messages.error(request, 'Erro ao reservar assento!')
+                messages.error(request, 'Erro!')
         else:
             form = AssentoModelForm()
         context = {
-            'form': form
+            'form': form,
+            'assento': Assentos.objects.all()
         }
         return render(request, 'assento.html', context)
     else:
-        messages.error(request, 'É necessário estar Autenticado para Assistir um filme')
-        return redirect('filme_list')
+        return redirect(filme_list)

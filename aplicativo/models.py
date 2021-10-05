@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 from stdimage import StdImageField
 
 
@@ -11,19 +10,20 @@ class Cliente(models.Model):
     def __str__(self):
         return "{}".format(self.nome)
 
-class Sala(models.Model):
-    ASSENTOS_CHOICES = (
-        ('1', '1'), ('2', '2'), ('3', '3'), ('4', '4'), ('5', '5'), ('6', '6'), ('7', '7'),
-        ('8', '9'), ('9', '9'), ('10', '10')
-    )
-    assentos = models.CharField(max_length=8, choices=ASSENTOS_CHOICES)
+
+class Assentos(models.Model):
+    registro = models.CharField('Sigla', max_length=4)
+    livre = models.BooleanField(default=True)
+
+    def __str__(self):
+        return "{} | Livre ={}".format(self.registro, self.livre)
 
 class Cartaz(models.Model):
     dataCartaz = models.DateTimeField(verbose_name='Data do Cartaz')
+    assentos = models.ManyToManyField(Assentos)
 
     def __str__(self):
         return "Dia {} ás {}".format(self.dataCartaz.strftime('%d/%m/%Y'), self.dataCartaz.strftime('%H:%M'))
-
 
 class Filme(models.Model):
     CATEGORIA_CHOICES = (
@@ -52,7 +52,3 @@ class Recibo(models.Model):
     assento = models.IntegerField()
     preco = models.DecimalField(max_digits=16, decimal_places=2)
 
-
-class Combo(models.Model):
-    produto = models.CharField('Produto', max_length=16)
-    preco = models.DecimalField(max_digits=16, decimal_places=2)

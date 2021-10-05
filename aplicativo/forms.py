@@ -2,12 +2,16 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from GerenciaCinema import settings
-from aplicativo.models import Filme, Cliente, Cartaz, Sala
+from aplicativo.models import Filme, Cliente, Cartaz, Assentos
+
 
 class FilmesModelForm(forms.ModelForm):
     class Meta:
         model = Filme
         fields = ['cartaz', 'nome', 'sinopse', 'categoria', 'classificacao', 'duracao', 'capa']
+        widgets = {
+            'duracao': forms.TextInput(attrs={'placeholder': '0h00m'})
+        }
 
 
 class ClienteModelForm(forms.ModelForm):
@@ -35,10 +39,7 @@ class CartazModelForm(forms.ModelForm):
         }
 
 class AssentoModelForm(forms.ModelForm):
-    assentos = forms.MultipleChoiceField(choices=Sala.ASSENTOS_CHOICES,
-                                         widget=forms.CheckboxSelectMultiple())
-
     class Meta:
-        model = Sala
-        fields = ['assentos']
+        model = Assentos
+        fields = []
 
