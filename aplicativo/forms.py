@@ -32,7 +32,7 @@ class RegistroClienteModelForm(UserCreationForm):
 class CartazModelForm(forms.ModelForm):
     class Meta:
         model = Cartaz
-        fields = ['dataCartaz']
+        fields = ['dataCartaz', 'assentos']
         widgets = {
             'dataCartaz': forms.DateInput(format=settings.DATETIME_INPUT_FORMATS,
                                           attrs={'placeholder': 'Ex:. 01/01/2000 00:00'})
